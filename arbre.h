@@ -80,7 +80,7 @@ void afficheDico(Arbre a);
  * <*buffer> : Chaine de caracteres tampon où l'on copie le mot 
  * <indice> : Indice à partir duquel on commence à lire/afficher les caractères/mots
  */
-
 void afficheDicoAux(Arbre a, unsigned char *buffer, int indice);
+
 
 #endif

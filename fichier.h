@@ -51,10 +51,29 @@ void sauvegardeLexiqueAux(Arbre a, FILE *out, unsigned char *buffer, int indice)
  */
 int sauvegardeArbre(Arbre a, char *nomOut);
 
+/*
+ * sauvegardeArbreAux
+ * Fonction auxiliaire permettant la sauvegarde du lexique dans un fichier
+ * <a> : Arbre de mots que l'on veut sauvegarder dans un fichier
+ * <*out> : Nom du fichier de sortie (avec le .DICO)
+ */
 void sauvegardeArbreAux(Arbre a, FILE *out);
 
+/*
+ * genereDot
+ * Fonction permettant de générer un pdf dot
+ * <a> : Arbre de mots que l'on veut traduire en dot
+ * <*out> : Nom du fichier en écriture seule 
+ */
 int genereDot(Arbre a, char *nomOut);
 
+
+/*
+ * ecrireArbreDot
+ * Fonction permettant de générer un pdf dot en prenant en compte un arbre
+ * <a> : Arbre de mots que l'on veut dessiner en dot
+ * <*stream> : Nom du fichier d'écriture
+ */
 void ecrireArbreDot(FILE *stream, Arbre a);
 
 #endif
