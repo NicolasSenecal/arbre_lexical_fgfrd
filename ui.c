@@ -10,7 +10,8 @@
 #include "ui.h"
 
 int cmdGenererArbre(Arbre *a, char *nomFichier) {
-
+  if (strlen(nomFichier) == 0)
+    return 0;
   int resGeneration;
   char nomFichierDico[MAX_CHAR] = "";
   char cmd;
@@ -39,6 +40,7 @@ int cmdGenererArbre(Arbre *a, char *nomFichier) {
       break;
     case 0:
       printf("Le fichier \"%s\" est vide !\n", nomFichier);
+      return 0;
       break;
     default:
       printf("Le fichier a généré %d mot(s) dans l'arbre lexicographique!\n", resGeneration);
@@ -62,11 +64,14 @@ void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSui
       break;
 
     case 'r': /* commande "-r" : indique si Mot apparaît dans le fichier <nomFichier> */
-      if (motSuivant == NULL) { /* si aucun mot n'est indiqué après -r */
-        printf("Veuillez indiquer un mot pour votre recherche/n");
-        break;
+      if (motSuivant == NULL) { /* si aucun mot n'est indiqué après -r, on demande de l'entrer */
+        unsigned char tmp[MAX_CHAR];
+        printf("Mot a rechercher : ");
+        scanf(" %51s", tmp);
+        motSuivant = tmp;
       }
       int nbOccurence = recherche(*a, motSuivant);
+
       if (nbOccurence == -1)
         printf("Le mot \"%s\" n'est pas présent dans le fichier %s\n", motSuivant, nomFichier);
       else
@@ -74,15 +79,11 @@ void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSui
       break;
 
     case 'S': /* commande "-S" : sauvegarde l'arbre dans un fichier .DICO */
-      /* Si <nomFichier> est un .DICO, on vide l'arbre et on le reconstruit à partir du fichier contenant le texte */
-      if (strstr(nomFichier, ".DICO")) {
-        freeArbre(*a);
-        *a = NULL;
-        nomFichier[strlen(nomFichier) - 6] = '\0';
-        genereArbreTexte(a, nomFichier);
-      }
+      /* Au cas où <nomFichier> est un .DICO, on vide l'arbre et on le reconstruit à partir du fichier contenant le texte */
+      freeArbre(*a);
+      *a = NULL;
+      genereArbreTexte(a, nomFichier);
       strcat(nomFichier, ".DICO");
-
       if (sauvegardeArbre(*a, nomFichier) != -1)
         printf("Arbre sauvegardé dans '%s'\n", nomFichier);
       else
