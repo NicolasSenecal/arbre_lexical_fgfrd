@@ -47,9 +47,6 @@ int cmdGenererArbre(Arbre *a, char *nomFichier) {
 }
 
 void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSuivant) {
-  char nomFichierDico[MAX_CHAR] = "";
-  char nomFichierLexique[MAX_CHAR] = "";
-  char nomFichierDot[MAX_CHAR] = "";
   switch (cmd) {
     case 'l': /* commande "-l" : affiche les mots du lexique du fichier <nomFichier> en ordre alphabétique ainsi que leurs occurences */
       printf("Mots du lexique :\n");
@@ -57,13 +54,11 @@ void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSui
       break;
 
     case 's': /* commande "-s" : sauvegarde les mots du lexique du fichier <nomFichier> en ordre alphabétique ainsi que leurs occurences dans un fichier .L */
-
-      strcat(nomFichierLexique, nomFichier);
-      strcat(nomFichierLexique, ".L");
-      if (sauvegardeLexique(*a, nomFichierLexique) != -1)
-        printf("Mots du lexique sauvegardé dans '%s'\n", nomFichierLexique);
+      strcat(nomFichier, ".L");
+      if (sauvegardeLexique(*a, nomFichier) != -1)
+        printf("Mots du lexique sauvegardé dans '%s'\n", nomFichier);
       else
-        printf("Erreur lors de la création du fichier '%s'\n", nomFichierLexique);
+        printf("Erreur lors de la création du fichier '%s'\n", nomFichier);
       break;
 
     case 'r': /* commande "-r" : indique si Mot apparaît dans le fichier <nomFichier> */
@@ -79,26 +74,29 @@ void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSui
       break;
 
     case 'S': /* commande "-S" : sauvegarde l'arbre dans un fichier .DICO */
-      strcat(nomFichierDico, nomFichier);
-      strcat(nomFichierDico, ".DICO");
-      /* On vide l'arbre et on le reconstruit à partir du fichier contenant le texte (au cas où l'arbre a été chargé depuis un .DICO) */
-      freeArbre(*a);
-      genereArbreTexte(a, nomFichier);
-      if (sauvegardeArbre(*a, nomFichierDico) != -1)
-        printf("Arbre sauvegardé dans '%s'\n", nomFichierDico);
+      /* Si <nomFichier> est un .DICO, on vide l'arbre et on le reconstruit à partir du fichier contenant le texte */
+      if (strstr(nomFichier, ".DICO")) {
+        freeArbre(*a);
+        *a = NULL;
+        nomFichier[strlen(nomFichier) - 6] = '\0';
+        genereArbreTexte(a, nomFichier);
+      }
+      strcat(nomFichier, ".DICO");
+
+      if (sauvegardeArbre(*a, nomFichier) != -1)
+        printf("Arbre sauvegardé dans '%s'\n", nomFichier);
       else
-        printf("Erreur lors de la création du fichier '%s'\n", nomFichierDico);
+        printf("Erreur lors de la création du fichier '%s'\n", nomFichier);
       break;
 
     case 'd': /* commande "-d" : sauvegarde l'arbre en version .dot */
-      strcat(nomFichierDot, nomFichier);
-      strcat(nomFichierDot, ".dot");
-      if (genereDot(*a, nomFichierDot) != -1) {
-        printf("Arbre sauvegardé dans '%s'\n", nomFichierDot);
+      strcat(nomFichier, ".dot");
+      if (genereDot(*a, nomFichier) != -1) {
+        printf("Arbre sauvegardé dans '%s'\n", nomFichier);
         printf("Pour générer un pdf de ce fichier, utiliser la commande :\n");
-        printf("\tdot -Tpdf %s -o %s.pdf -Gcharset=latin1\n", nomFichierDot, nomFichierDot);
+        printf("\tdot -Tpdf %s -o %s.pdf -Gcharset=latin1\n", nomFichier, nomFichier);
       } else
-        printf("Erreur lors de la création du fichier '%s'\n", nomFichierDot);
+        printf("Erreur lors de la création du fichier '%s'\n", nomFichier);
       break;
   }
 }
