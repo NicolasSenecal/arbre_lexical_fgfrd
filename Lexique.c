@@ -23,7 +23,6 @@ int main(int argc, char *argv[]) {
     strcpy(nomFichier, argv[argc - 1]);
   }
 
-printf("%s\n", argv[argc-1]);
   
 
  if(strcmp(argv[argc-1],"-h")!=0){
