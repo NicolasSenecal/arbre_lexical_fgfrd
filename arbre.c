@@ -93,3 +93,5 @@ void afficheDicoAux(Arbre a, unsigned char *buffer, int indice) {
 }
 
 
+
+

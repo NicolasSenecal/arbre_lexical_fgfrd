@@ -35,7 +35,7 @@ int cmdGenererArbre(Arbre *a, char *nomFichier) {
   }
   switch (resGeneration) {
     case -1:
-      printf("Impossible d'ouvrir le fichier \"%s\" !\n", nomFichier);
+      printf("Impossible d'ouvrir le fichier \n");
       return 0;
       break;
     case 0:
@@ -98,6 +98,10 @@ void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSui
         printf("\tdot -Tpdf %s -o %s.pdf -Gcharset=latin1\n", nomFichier, nomFichier);
       } else
         printf("Erreur lors de la création du fichier '%s'\n", nomFichier);
+      break;
+
+      case 'h': /* commande "-h" : affiche l'aide */
+      printHelp();
       break;
   }
 }

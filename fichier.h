@@ -76,4 +76,10 @@ int genereDot(Arbre a, char *nomOut);
  */
 void ecrireArbreDot(FILE *stream, Arbre a);
 
+
+/*
+ * printHelp
+ * Fonction permettant d'écrire l'aide aux commandes*/
+void printHelp();
+
 #endif

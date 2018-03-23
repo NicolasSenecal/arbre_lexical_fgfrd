@@ -10,7 +10,8 @@ all: $(EXEC)
 Lexique: $(OBJ)
 	@$(CC) -o $@ $^ $(LDFLAGS)
 	@echo "--------------------------------------------------------------"
-	@echo "  to execute type: [-l] [-r <Mot>] [-s] [-S] [-d] nomFichier  "
+	@echo "  to execute type: ./Lexique [-l] [-r <Mot>] [-s] [-S] [-d] nomFichier  "
+	@echo "	 for help type ./Lexique -h 	"
 	@echo "--------------------------------------------------------------"
 
 Lexique.o : ui.h fichier.h arbre.h

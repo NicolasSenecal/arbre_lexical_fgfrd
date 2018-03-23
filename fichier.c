@@ -131,3 +131,30 @@ void ecrireArbreDot(FILE *stream, Arbre a) {
     ecrireArbreDot(stream, a->frered);
   }
 }
+
+
+void printHelp(){
+  printf("\033[H\033[2J");
+
+  printf(" _____________ \n");
+  printf("** AFFICHAGE **\n");
+  printf(" _____________ \n");
+  printf("Pour afficher les mots du fichier en ordre alphabétique il suffit de taper : \033[34;01m./Lexique -l votrefichier\033[00m\n");
+  printf(" _____________ \n");
+  printf("** SAUVEGARDE **\n");
+  printf(" _____________ \n");
+  printf("Pour sauvegarde les mots du lexique en ordre alphabétique ainsi que leurs occurences dans un fichier .L  taper :\033[34;01m ./Lexique -s votrefichier\033[00m\n \n");
+  printf(" _____________ \n");
+  printf("** RECHERCHE **\n ");
+  printf(" _____________ \n"); 
+  printf("Pour rechercher un mot dans un fichier taper : \033[34;01m \033[34;01m ./Lexique -r votremot\033[00m\n \n ");
+  printf(" _____________ \n");
+  printf("** SAUVEGARDE DICO ** \n");
+  printf(" _____________ \n");
+  printf("Pour sauvegarder votre fichier en .DICO taper : \033[34;01m ./Lexique -S votrefichier\033[00m\n \n");
+  printf(" _____________ \n");
+  printf("** AFFICHAGE DOT **\n");
+  printf(" _____________ \n");
+  printf("Pour visualiser votre fichier en .DOT taper : \033[34;01m ./Lexique -d votrefichier\033[00m\n\n");
+
+}

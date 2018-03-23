@@ -18,15 +18,21 @@ int main(int argc, char *argv[]) {
 
   if (argc == 1) {/* Aucune commandes */
     printf("Usage : ./Lexique [-l] [-r <Mot>] [-s] [-S] [-d] nomFichier\n");
+    printf("Tapez ./Lexique -h pour l'aide \n");
   } else {
     strcpy(nomFichier, argv[argc - 1]);
   }
 
+printf("%s\n", argv[argc-1]);
+  
+
+ if(strcmp(argv[argc-1],"-h")!=0){
   while (cmdGenererArbre(&a, nomFichier) == 0) {
     printf("Veuillez entrez un nom de fichier valide (ou 0 pour quitter) : ");
     scanf(" %51s", cmd);
     if (cmd[0] == '0')
       return 0;
+
     strcpy(nomFichier, cmd);
   }
 
@@ -41,6 +47,11 @@ int main(int argc, char *argv[]) {
   }
 
   freeArbre(a);
+}
+  else{ 
+    printHelp();
+  }
 
-  return 0;
+return 0;
+
 }
