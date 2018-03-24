@@ -1,0 +1,22 @@
+digraph arbre {
+  node [shape=circle, height=.5, fontsize=16, splines=ortho];
+n0x7f7fabe00000 [label="t"];
+n0x7f7fabe00000 -> n0x7f7fabe00020;
+n0x7f7fabe00020 [label="e"];
+n0x7f7fabe00020 -> n0x7f7fabe00040;
+n0x7f7fabe00040 [label="s"];
+n0x7f7fabe00040 -> n0x7f7fabe00060;
+n0x7f7fabe00060 [label="t"];
+n0x7f7fabe00060 -> n0x7f7fabe00080;
+n0x7f7fabe00080 [label="\\0"];
+n0x7f7fabe00020 -> n0x7f7fabe000a0 [rankdir=LR];
+{rank=same; n0x7f7fabe00020, n0x7f7fabe000a0 };
+n0x7f7fabe000a0 [label="r"];
+n0x7f7fabe000a0 -> n0x7f7fabe000c0;
+n0x7f7fabe000c0 [label="o"];
+n0x7f7fabe000c0 -> n0x7f7fabe000e0;
+n0x7f7fabe000e0 [label="l"];
+n0x7f7fabe000e0 -> n0x7f7fabe00100;
+n0x7f7fabe00100 [label="\\0"];
+
+}

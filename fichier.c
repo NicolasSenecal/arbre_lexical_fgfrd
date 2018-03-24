@@ -156,5 +156,8 @@ void printHelp(){
   printf("** AFFICHAGE DOT **\n");
   printf(" _____________ \n");
   printf("Pour visualiser votre fichier en .DOT taper : \033[35;01m ./Lexique -d votrefichier\033[00m\n\n");
+  printf("** MENU **\n");
+  printf(" _____________ \n");
+  printf("Pour être guidé par un menu, il suffit de taper \033[35;01m ./Lexique  \033[00m\n\n");
 
 }
