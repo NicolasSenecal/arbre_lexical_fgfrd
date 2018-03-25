@@ -21,13 +21,6 @@
  */
 int genereArbreTexte(Arbre *a, char *nomIn);
 
-/*
- * genereArbreDico
- * Construit un arbre lexical depuis un fichier .DICO
- * TO DO (retourne -1 si erreur ou le nb de mot ajouté sans compté les doublons)
- * Retourne -1 si une erreur est survenue a l'ouverture du fichier
- *          ou alors le nombre de mot ajouté (sans compter les doublons)
- */
 int genereArbreDico(Arbre *a, char *nomIn);
 
 /*
@@ -68,19 +61,25 @@ void sauvegardeArbreAux(Arbre a, FILE *out);
 
 /*
  * genereDot
-* Fonction permettant de générer un fichier dot de l'arbre lexicographique
+ * Fonction permettant de générer un pdf dot
  * <a> : Arbre de mots que l'on veut traduire en dot
- * <*nomOut> : Nom du fichier en écriture seule 
+ * <*out> : Nom du fichier en écriture seule 
  */
 int genereDot(Arbre a, char *nomOut);
 
 
 /*
  * ecrireArbreDot
- * Fonction permettant d'écrire les lignes correspondant a l'arbre dans le fichier DOT
+ * Fonction permettant de générer un pdf dot en prenant en compte un arbre
  * <a> : Arbre de mots que l'on veut dessiner en dot
- * <*stream> : Fichier d'écriture
+ * <*stream> : Nom du fichier d'écriture
  */
 void ecrireArbreDot(FILE *stream, Arbre a);
+
+
+/*
+ * printHelp
+ * Fonction permettant d'écrire l'aide aux commandes*/
+void printHelp();
 
 #endif

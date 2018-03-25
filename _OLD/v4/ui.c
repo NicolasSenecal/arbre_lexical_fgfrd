@@ -49,9 +49,6 @@ int cmdGenererArbre(Arbre *a, char *nomFichier) {
 }
 
 void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSuivant) {
-  char nomFichierDot[MAX_CHAR] = "";
-  char nomFichierL[MAX_CHAR] = "";
-        char nomFichierDico[MAX_CHAR] = "";
   switch (cmd) {
     case 'l': /* commande "-l" : affiche les mots du lexique du fichier <nomFichier> en ordre alphabétique ainsi que leurs occurences */
       printf("Mots du lexique :\n");
@@ -59,12 +56,11 @@ void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSui
       break;
 
     case 's': /* commande "-s" : sauvegarde les mots du lexique du fichier <nomFichier> en ordre alphabétique ainsi que leurs occurences dans un fichier .L */
-      strcat(nomFichierL, nomFichier);
-      strcat(nomFichierL, ".L");
-      if (sauvegardeLexique(*a, nomFichierL) != -1)
-        printf("Mots du lexique sauvegardé dans '%s'\n", nomFichierL);
+      strcat(nomFichier, ".L");
+      if (sauvegardeLexique(*a, nomFichier) != -1)
+        printf("Mots du lexique sauvegardé dans '%s'\n", nomFichier);
       else
-        printf("Erreur lors de la création du fichier '%s'\n", nomFichierL);
+        printf("Erreur lors de la création du fichier '%s'\n", nomFichier);
       break;
 
     case 'r': /* commande "-r" : indique si Mot apparaît dans le fichier <nomFichier> */
@@ -87,63 +83,25 @@ void switchCmdLettre(Arbre *a, char *nomFichier, char cmd, unsigned char *motSui
       freeArbre(*a);
       *a = NULL;
       genereArbreTexte(a, nomFichier);
-      strcat(nomFichierDico, nomFichier);
-      strcat(nomFichierDico, ".DICO");
-      if (sauvegardeArbre(*a, nomFichierDico) != -1)
-        printf("Arbre sauvegardé dans '%s'\n", nomFichierDico);
+      strcat(nomFichier, ".DICO");
+      if (sauvegardeArbre(*a, nomFichier) != -1)
+        printf("Arbre sauvegardé dans '%s'\n", nomFichier);
       else
-        printf("Erreur lors de la création du fichier '%s'\n", nomFichierDico);
+        printf("Erreur lors de la création du fichier '%s'\n", nomFichier);
       break;
 
     case 'd': /* commande "-d" : sauvegarde l'arbre en version .dot */
-      strcat(nomFichierDot, nomFichier);
-      strcat(nomFichierDot, ".dot");
-      if (genereDot(*a, nomFichierDot) != -1) {
-        printf("Arbre sauvegardé dans '%s'\n", nomFichierDot);
+      strcat(nomFichier, ".dot");
+      if (genereDot(*a, nomFichier) != -1) {
+        printf("Arbre sauvegardé dans '%s'\n", nomFichier);
         printf("Pour générer un pdf de ce fichier, utiliser la commande :\n");
-        printf("\tdot -Tpdf %s -o %s.pdf -Gcharset=latin1\n", nomFichierDot, nomFichierDot);
+        printf("\tdot -Tpdf %s -o %s.pdf -Gcharset=latin1\n", nomFichier, nomFichier);
       } else
-        printf("Erreur lors de la création du fichier '%s'\n", nomFichierDot);
+        printf("Erreur lors de la création du fichier '%s'\n", nomFichier);
       break;
 
-    case 'h': /* commande "-h" : affiche l'aide */
+      case 'h': /* commande "-h" : affiche l'aide */
       printHelp();
       break;
   }
-}
-
-void printHelp() {
-  printf("\033[H\033[2J");
-  printf("Usage : ./Lexique [-l] [-r <Mot>] [-s] [-S] [-d] nomFichier\n\n");
-
-  printf("-- AFFICHAGE :\n");
-  printf("\t\033[35;01m-l\033[00m : affiche les mots du fichier en ordre alphabétique\n");
-
-  printf("-- SAUVEGARDE :\n");
-  printf("\t\033[35;01m-s\033[00m : sauvegarde les mots du lexique en ordre alphabétique ainsi que leurs occurences dans un fichier .L \n");
-  printf("\t\033[35;01m-S\033[00m : sauvegarder l'arbre lexicographique de votre fichier en .DICO \n");
-  printf("\t\033[35;01m-d\033[00m : sauvegarder l'arbre lexicographique au format DOT pour pouvoir le visualiser \n");
-
-  printf("-- RECHERCHE : \n");
-  printf("\t\033[35;01m-r [<Mot>]\033[00m : rechercher un mot dans l'arbre lexicographique\n");
-
-  printf("-- MENU :\n");
-  printf("\tEn l'absence d'option sur la ligne de commande, toutes ces fontionnalités seront accessibles via un menu.\n\n");
-
-}
-
-void printMenu() {
-  printf("\n");
-  printf("--------------------------\n");
-  printf("-----      Menu      -----\n");
-  printf("--------------------------\n");
-  printf("\n");
-  printf("\033[35;01m l \033[00mAfficher les mots du lexique par ordre alphabétique. \n");
-  printf("\033[35;01m s \033[00mSauvegarder les mots ordonnés dans un nouveau fichier. \n");
-  printf("\033[35;01m r \033[00mRechercher un mot du lexique.  \n");
-  printf("\033[35;01m S \033[00mSauvegarder votre lexique en format .DICO.  \n");
-  printf("\033[35;01m d \033[00mSauvegarder votre lexique en format .dot. \n");
-  printf("\033[35;01m h \033[00mRéafficher le menu\n");
-  printf("\033[35;01m q \033[00mQuitter le programme\n");
-  printf("\n");
 }
